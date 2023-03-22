@@ -19,6 +19,7 @@ const options = {
     }
   }
 }
+
 app.use(cors(options));
 
 app.get('/', (req, res) => {
