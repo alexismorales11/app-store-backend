@@ -1,2 +1,16 @@
 # app-store
 app-store
+
+
+# Querys DB
+
+SELECT *FROM TASK;
+
+CREATE DATABASE DB_APP_STORE;
+
+CREATE TABLE TASK2 (
+    id serial PRIMARY KEY,
+    title VARCHAR( 255 ) NOT NULL,
+    COMPLETED BOOLEAN DEFAULT FALSE
+);
+
