@@ -51,11 +51,8 @@ class ProductsService {
   }
 
   async delete(id) {
-    const index = this.products.findIndex((item) => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('product not found');
-    }
-    this.products.splice(index, 1);
+    const query =   `DELETE FROM TASK WHERE ID = ${id}`;
+    await sequelize.query(query);
     return { id };
   }
 }
