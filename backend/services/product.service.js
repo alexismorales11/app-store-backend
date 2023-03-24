@@ -29,7 +29,7 @@ class ProductsService {
   }
 
   async find() {
-    const query = 'SELECT * FROM task';
+    const query = 'SELECT * FROM task ORDER BY ID DESC';
     const [data] = await sequelize.query(query);
     return data;
   }
