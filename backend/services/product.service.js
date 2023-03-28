@@ -4,8 +4,7 @@ const boom = require('@hapi/boom');
 const sequelize = require('../libs/sequelize');
 
 class ProductsService {
-
-  constructor(){
+  constructor() {
     this.products = [];
     this.generate();
   }
@@ -24,12 +23,9 @@ class ProductsService {
   }
 
   async create(data) {
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data
-    }
-    this.products.push(newProduct);
-    return newProduct;
+    const query = `INSERT INTO TASK (TITLE, COMPLETED, NOMBRE)  VALUES ('${data.title}', ${data.completed}, '${data.nombre}')`;
+    await sequelize.query(query);
+    return data;
   }
 
   async find() {
@@ -45,27 +41,20 @@ class ProductsService {
   }
 
   async update(id, changes) {
-    const index = this.products.findIndex(item => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('product not found');
-    }
-    const product = this.products[index];
-    this.products[index] = {
-      ...product,
-      ...changes
-    };
-    return this.products[index];
+    const query = `UPDATE TASK 
+                   SET TITLE = '${changes.title}', COMPLETED =  ${changes.completed} ,NOMBRE = '${changes.nombre}'
+                   WHERE ID = ${id}`;
+    await sequelize.query(query);
+    const queryRes = `SELECT * FROM TASK WHERE ID = ${id}`;
+    const [data] = await sequelize.query(queryRes);
+    return data;
   }
 
   async delete(id) {
-    const index = this.products.findIndex(item => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('product not found');
-    }
-    this.products.splice(index, 1);
+    const query =   `DELETE FROM TASK WHERE ID = ${id}`;
+    await sequelize.query(query);
     return { id };
   }
-
 }
 
 module.exports = ProductsService;
