@@ -7,7 +7,7 @@ CREATE TABLE TASK(
 	COMPLETED BOOLEAN DEFAULT FALSE
 );
 
-# validación de tabla creada
+# validación de tabla creada 
 
 SELECT *FROM TASK
 
