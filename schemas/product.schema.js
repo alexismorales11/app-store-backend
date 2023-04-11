@@ -5,10 +5,10 @@ const title = Joi.string().min(3).max(15);
 const completed = Joi.boolean();
 const nombre = Joi.string().min(3).max(15);
 
+
 const createProductSchema = Joi.object({
   title: title.required(),
-  completed: completed,
-  nombre: nombre,
+  completed: completed
 });
 
 const updateProductSchema = Joi.object({
@@ -17,8 +17,8 @@ const updateProductSchema = Joi.object({
   nombre: nombre,
 });
 
-const getProductSchema = Joi.object({
+const productValidationById = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema };
+module.exports = { createProductSchema, updateProductSchema, productValidationById };
